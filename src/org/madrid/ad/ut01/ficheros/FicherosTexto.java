@@ -14,7 +14,7 @@ public class FicherosTexto implements InterfazFicherosTexto{
 
 	@Override
 	public void leer(String rutaFichero) {
-		// TODO Auto-generated method stub test
+		// TODO Auto-generated method stub testo
 		
 	}
 
