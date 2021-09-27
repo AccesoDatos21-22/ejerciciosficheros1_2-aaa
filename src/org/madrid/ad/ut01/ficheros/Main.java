@@ -8,8 +8,8 @@ public class Main {
 		
 		FicherosTexto ficherosTexto = new FicherosTexto();
 		
-		// Ejercicio 8
-		ficherosTexto.palabraMasLarga(QUIJOTE);
+		// Ejercicio 10
+		ficherosTexto.frecuenciaLetras(QUIJOTE);
 		
 		// Padding
 		System.out.println("\n-----\n");
