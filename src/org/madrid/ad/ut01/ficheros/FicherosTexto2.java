@@ -22,7 +22,7 @@ public class FicherosTexto2 implements InterfazFicherosTexto{
 			while (true) {
 				int charInt = reader.read();
 				
-				if (charInt == -1) {
+				if (charInt == -1) {k
 					break;
 				}
 				
