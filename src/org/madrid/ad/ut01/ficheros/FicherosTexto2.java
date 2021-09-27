@@ -11,7 +11,7 @@ import java.nio.charset.StandardCharsets;
  * @version v1
  * @license GPLv3
  */
-public class FicherosTexto implements InterfazFicherosTexto{
+public class FicherosTexto2 implements InterfazFicherosTexto{
 	/**
 	 * Ejercicio 2
 	 * @param rutaFichero

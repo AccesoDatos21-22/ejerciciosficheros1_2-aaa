@@ -6,10 +6,10 @@ public class Main {
 	public static void main(String[] args) {
 		System.out.println("Directorio actual: " + System.getProperty("user.dir"));
 		
-		FicherosTexto ficherosTexto = new FicherosTexto();
+		FicherosTexto2 ficherosTexto2 = new FicherosTexto2();
 		
 		// Ejercicio 2
-		ficherosTexto.leer(QUIJOTE);
+		ficherosTexto2.leer(QUIJOTE);
 		
 		// Padding
 		System.out.println("\n-----\n");
