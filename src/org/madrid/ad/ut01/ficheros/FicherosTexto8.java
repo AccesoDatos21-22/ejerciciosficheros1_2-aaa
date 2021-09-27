@@ -11,7 +11,7 @@ import java.nio.charset.StandardCharsets;
  * @version v1
  * @license GPLv3
  */
-public class FicherosTexto6 implements InterfazFicherosTexto{
+public class FicherosTexto8 implements InterfazFicherosTexto{
 	/**
 	 * Ejercicio 2
 	 * @param rutaFichero
@@ -44,34 +44,8 @@ public class FicherosTexto6 implements InterfazFicherosTexto{
 	 */
 	@Override
 	public int contarPalabras(String rutaFichero) {
-		int count = 0;
-		boolean wordStarted = false;
-		
-		try (BufferedReader reader = new BufferedReader(new FileReader(rutaFichero))) {
-			while (true) {
-				int charInt = reader.read();
-				
-				if (charInt == -1) {
-					break;
-				}
-				
-				if (isLetter(charInt)) {
-					wordStarted = true;
-				} else {
-					if (wordStarted) {
-						count++;
-						
-						wordStarted = false;
-					}
-				}
-			}
-		} catch (FileNotFoundException e) {
-			System.err.println("Fichero " + rutaFichero + " no encontrado");
-		} catch (IOException e) {
-			System.err.println("El fichero " + rutaFichero + " no se pudo leer");
-		}
-		
-		return count;
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 	@Override
@@ -86,7 +60,53 @@ public class FicherosTexto6 implements InterfazFicherosTexto{
 	 */
 	@Override
 	public int palabraMasLarga(String rutaFichero) {
-		// TODO Auto-generated method stub
+		int count = 0;
+		
+		String word = "";
+		String longestWord = "";
+		
+		boolean wordStarted = false;
+		
+		try (BufferedReader reader = new BufferedReader(new FileReader(rutaFichero))) {
+			while (true) {
+				int charInt = reader.read();
+				
+				if (charInt == -1) {
+					break;
+				}
+				
+				// Si es una letra, la palabra ha comenzado
+				if (isLetter(charInt)) {
+					wordStarted = true;
+					word += (char) charInt;
+					count = 0;
+				} else {
+					// Si no lo es y ya había comenzado una palabra, es porque tenemos otra palabra más terminada
+					if (wordStarted) {
+						count++;
+						
+						wordStarted = false;
+						
+						if (word.length() > longestWord.length()) {
+							longestWord = word;
+						}
+						
+						word = "";
+					}
+				}
+			}
+		} catch (FileNotFoundException e) {
+			System.err.println("Fichero " + rutaFichero + " no encontrado");
+			
+			return -1;
+		} catch (IOException e) {
+			System.err.println("El fichero " + rutaFichero + " no se pudo leer");
+			
+			return -1;
+		}
+		
+		System.out.println("La palabra más larga es '" + longestWord + "', con " + longestWord.length() + " caracteres");
+		
 		return 0;
 	}
 	
@@ -106,6 +126,11 @@ public class FicherosTexto6 implements InterfazFicherosTexto{
 		return 0;
 	}
 	
+	/**
+	 * Detecta si se trata de una letra
+	 * @param charInt
+	 * @return boolean
+	 */
 	private boolean isLetter(int charInt) {
 		// Mayúsculas
 		if ((charInt >= 97 && charInt <= 123) || charInt == 241) {
