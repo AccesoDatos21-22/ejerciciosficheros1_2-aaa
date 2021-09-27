@@ -26,6 +26,7 @@ public class FicherosTexto implements InterfazFicherosTexto{
 			while (true) {
 				int charInt = reader.read();
 				
+				// -1 indica fin de fichero
 				if (charInt == -1) {
 					break;
 				}
@@ -58,7 +59,8 @@ public class FicherosTexto implements InterfazFicherosTexto{
 					break;
 				}
 				
-				if ((char)charInt == ' ') { //TODO salto
+				// Los espacios y saltos no cuentan
+				if ((char)charInt == ' ' || (char)charInt == '\n') {
 					continue;
 				}
 				
@@ -98,9 +100,11 @@ public class FicherosTexto implements InterfazFicherosTexto{
 					break;
 				}
 				
+				// Si es una letra, la palabra ha comenzado
 				if (isLetter(charInt)) {
 					wordStarted = true;
 				} else {
+					// Si no lo es y ya había comenzado una palabra, es porque tenemos otra palabra más terminada
 					if (wordStarted) {
 						count++;
 						
@@ -158,6 +162,7 @@ public class FicherosTexto implements InterfazFicherosTexto{
 						
 						wordStarted = false;
 						
+						// Comparamos
 						if (word.length() > longestWord.length()) {
 							longestWord = word;
 						}
@@ -202,7 +207,7 @@ public class FicherosTexto implements InterfazFicherosTexto{
 			while (true) {
 				int charInt = reader.read();
 				
-				// Conversor de acentos a caracteres planos; en minúscuals y mayúscuals respectivamente
+				// Conversor de acentos a caracteres planos; en minúsculas y mayúsculas, respectivamente
 				switch (charInt) {
 					// A
 					case 225:
@@ -279,6 +284,12 @@ public class FicherosTexto implements InterfazFicherosTexto{
 		return 0;
 	}
 	
+	/**
+	 * Comprueba si se trata de una letra
+	 *
+	 * @param charInt
+	 * @return Si es una letra
+	 */
 	private boolean isLetter(int charInt) {
 		// Mayúsculas
 		if ((charInt >= 97 && charInt <= 123) || charInt == 209) {
