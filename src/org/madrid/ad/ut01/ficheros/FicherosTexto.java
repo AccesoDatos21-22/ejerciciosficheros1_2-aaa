@@ -18,21 +18,7 @@ public class FicherosTexto implements InterfazFicherosTexto{
 	 */
 	@Override
 	public void leer(String rutaFichero) {
-		try (BufferedReader reader = new BufferedReader(new FileReader(rutaFichero))) {
-			while (true) {
-				int charInt = reader.read();
-				
-				if (charInt == -1) {
-					break;
-				}
-				
-				System.out.print((char)charInt);
-			}
-		} catch (FileNotFoundException e) {
-			System.err.println("Fichero " + rutaFichero + " no encontrado");
-		} catch (IOException e) {
-			System.err.println("El fichero " + rutaFichero + " no se pudo leer");
-		}
+		// TODO Auto-generated method stub
 	}
 	
 	/**
@@ -42,8 +28,29 @@ public class FicherosTexto implements InterfazFicherosTexto{
 	 */
 	@Override
 	public int contarCaracteres(String rutaFichero) {
-		// TODO Auto-generated method stub
-		return 0;
+		int count = 0;
+		
+		try (BufferedReader reader = new BufferedReader(new FileReader(rutaFichero))) {
+			while (true) {
+				int charInt = reader.read();
+				
+				if (charInt == -1) {
+					break;
+				}
+				
+				if ((char)charInt == ' ') { //TODO salto
+					continue;
+				}
+				
+				count++;
+			}
+		} catch (FileNotFoundException e) {
+			System.err.println("Fichero " + rutaFichero + " no encontrado");
+		} catch (IOException e) {
+			System.err.println("El fichero " + rutaFichero + " no se pudo leer");
+		}
+		
+		return count;
 	}
 	
 	@Override
