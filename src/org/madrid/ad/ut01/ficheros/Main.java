@@ -6,7 +6,7 @@ public class Main {
 	public static void main(String[] args) {
 		System.out.println("Directorio actual: " + System.getProperty("user.dir"));
 		
-		FicherosTexto10 ficherosTexto = new FicherosTexto10();
+		FicherosTexto ficherosTexto = new FicherosTexto();
 		
 		// Ejercicio 10
 		ficherosTexto.frecuenciaLetras(QUIJOTE);
