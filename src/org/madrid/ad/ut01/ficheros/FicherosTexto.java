@@ -28,29 +28,8 @@ public class FicherosTexto implements InterfazFicherosTexto{
 	 */
 	@Override
 	public int contarCaracteres(String rutaFichero) {
-		int count = 0;
-		
-		try (BufferedReader reader = new BufferedReader(new FileReader(rutaFichero))) {
-			while (true) {
-				int charInt = reader.read();
-				
-				if (charInt == -1) {
-					break;
-				}
-				
-				if ((char)charInt == ' ') { //TODO salto
-					continue;
-				}
-				
-				count++;
-			}
-		} catch (FileNotFoundException e) {
-			System.err.println("Fichero " + rutaFichero + " no encontrado");
-		} catch (IOException e) {
-			System.err.println("El fichero " + rutaFichero + " no se pudo leer");
-		}
-		
-		return count;
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 	@Override
@@ -65,8 +44,34 @@ public class FicherosTexto implements InterfazFicherosTexto{
 	 */
 	@Override
 	public int contarPalabras(String rutaFichero) {
-		// TODO Auto-generated method stub
-		return 0;
+		int count = 0;
+		boolean wordStarted = false;
+		
+		try (BufferedReader reader = new BufferedReader(new FileReader(rutaFichero))) {
+			while (true) {
+				int charInt = reader.read();
+				
+				if (charInt == -1) {
+					break;
+				}
+				
+				if (isLetter(charInt)) {
+					wordStarted = true;
+				} else {
+					if (wordStarted) {
+						count++;
+						
+						wordStarted = false;
+					}
+				}
+			}
+		} catch (FileNotFoundException e) {
+			System.err.println("Fichero " + rutaFichero + " no encontrado");
+		} catch (IOException e) {
+			System.err.println("El fichero " + rutaFichero + " no se pudo leer");
+		}
+		
+		return count;
 	}
 	
 	@Override
@@ -99,5 +104,26 @@ public class FicherosTexto implements InterfazFicherosTexto{
 	public int frecuenciaLetras(String rutaFichero) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	
+	private boolean isLetter(int charInt) {
+		// Mayúsculas
+		if ((charInt >= 97 && charInt <= 123) || charInt == 241) {
+			return true;
+		}
+		
+		// Repetimos de nuevo en minúsculas
+		charInt -= 32;
+		
+		if ((charInt >= 97 && charInt <= 123) || charInt == 241) {
+			return true;
+		}
+		
+		// Acentos, diéresis, demás añadidos
+		if (charInt >= 160 && charInt <= 252) {
+			return true;
+		}
+		
+		return false;
 	}
 }

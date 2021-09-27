@@ -8,8 +8,8 @@ public class Main {
 		
 		FicherosTexto ficherosTexto = new FicherosTexto();
 		
-		// Ejercicio 4
-		System.out.println("El Quijote tiene " + ficherosTexto.contarCaracteres(QUIJOTE) + " caracteres");
+		// Ejercicio 6
+		System.out.println("El Quijote tiene " + ficherosTexto.contarPalabras(QUIJOTE) + " palabras");
 		
 		// Padding
 		System.out.println("\n-----\n");
