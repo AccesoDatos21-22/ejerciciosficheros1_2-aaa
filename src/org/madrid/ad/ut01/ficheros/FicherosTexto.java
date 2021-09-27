@@ -13,25 +13,64 @@ import java.util.Map;
  * @version v1
  * @license GPLv3
  */
-public class FicherosTexto10 implements InterfazFicherosTexto{
+public class FicherosTexto implements InterfazFicherosTexto{
 	/**
 	 * Ejercicio 2
+	 * Lee el fichero caracter a caracter y lo va imprimiendo en tiempo real
+	 *
 	 * @param rutaFichero
 	 */
 	@Override
 	public void leer(String rutaFichero) {
-		// TODO Auto-generated method stub
+		try (BufferedReader reader = new BufferedReader(new FileReader(rutaFichero))) {
+			while (true) {
+				int charInt = reader.read();
+				
+				if (charInt == -1) {
+					break;
+				}
+				
+				System.out.print((char)charInt);
+			}
+		} catch (FileNotFoundException e) {
+			System.err.println("Fichero " + rutaFichero + " no encontrado");
+		} catch (IOException e) {
+			System.err.println("El fichero " + rutaFichero + " no se pudo leer");
+		}
 	}
 	
 	/**
 	 * Ejercicio 4
+	 * Cuenta los caracteres
+	 *
 	 * @param rutaFichero
-	 * @return
+	 * @return Conteo de caracteres
 	 */
 	@Override
 	public int contarCaracteres(String rutaFichero) {
-		// TODO Auto-generated method stub
-		return 0;
+		int count = 0;
+		
+		try (BufferedReader reader = new BufferedReader(new FileReader(rutaFichero))) {
+			while (true) {
+				int charInt = reader.read();
+				
+				if (charInt == -1) {
+					break;
+				}
+				
+				if ((char)charInt == ' ') { //TODO salto
+					continue;
+				}
+				
+				count++;
+			}
+		} catch (FileNotFoundException e) {
+			System.err.println("Fichero " + rutaFichero + " no encontrado");
+		} catch (IOException e) {
+			System.err.println("El fichero " + rutaFichero + " no se pudo leer");
+		}
+		
+		return count;
 	}
 	
 	@Override
@@ -41,13 +80,41 @@ public class FicherosTexto10 implements InterfazFicherosTexto{
 	
 	/**
 	 * Ejercicio 6
+	 * Cuenta las palabras
+	 *
 	 * @param rutaFichero
-	 * @return
+	 * @return Conteo de palabras
 	 */
 	@Override
 	public int contarPalabras(String rutaFichero) {
-		// TODO Auto-generated method stub
-		return 0;
+		int count = 0;
+		boolean wordStarted = false;
+		
+		try (BufferedReader reader = new BufferedReader(new FileReader(rutaFichero))) {
+			while (true) {
+				int charInt = reader.read();
+				
+				if (charInt == -1) {
+					break;
+				}
+				
+				if (isLetter(charInt)) {
+					wordStarted = true;
+				} else {
+					if (wordStarted) {
+						count++;
+						
+						wordStarted = false;
+					}
+				}
+			}
+		} catch (FileNotFoundException e) {
+			System.err.println("Fichero " + rutaFichero + " no encontrado");
+		} catch (IOException e) {
+			System.err.println("El fichero " + rutaFichero + " no se pudo leer");
+		}
+		
+		return count;
 	}
 	
 	@Override
@@ -57,12 +124,60 @@ public class FicherosTexto10 implements InterfazFicherosTexto{
 	
 	/**
 	 * Ejercicio 8
+	 * Devuelve la palabra más larga
+	 *
 	 * @param rutaFichero
-	 * @return
+	 * @return 0 si funciona; -1 si no
 	 */
 	@Override
 	public int palabraMasLarga(String rutaFichero) {
-		// TODO Auto-generated method stub
+		int count = 0;
+		
+		String word = "";
+		String longestWord = "";
+		
+		boolean wordStarted = false;
+		
+		try (BufferedReader reader = new BufferedReader(new FileReader(rutaFichero))) {
+			while (true) {
+				int charInt = reader.read();
+				
+				if (charInt == -1) {
+					break;
+				}
+				
+				// Si es una letra, la palabra ha comenzado
+				if (isLetter(charInt)) {
+					wordStarted = true;
+					word += (char) charInt;
+					count = 0;
+				} else {
+					// Si no lo es y ya había comenzado una palabra, es porque tenemos otra palabra más terminada
+					if (wordStarted) {
+						count++;
+						
+						wordStarted = false;
+						
+						if (word.length() > longestWord.length()) {
+							longestWord = word;
+						}
+						
+						word = "";
+					}
+				}
+			}
+		} catch (FileNotFoundException e) {
+			System.err.println("Fichero " + rutaFichero + " no encontrado");
+			
+			return -1;
+		} catch (IOException e) {
+			System.err.println("El fichero " + rutaFichero + " no se pudo leer");
+			
+			return -1;
+		}
+		
+		System.out.println("La palabra más larga es '" + longestWord + "', con " + longestWord.length() + " caracteres");
+		
 		return 0;
 	}
 	
@@ -73,8 +188,10 @@ public class FicherosTexto10 implements InterfazFicherosTexto{
 	
 	/**
 	 * Ejercicio 10
+	 * Devuevle la frecuencia de cada letra del abecedario
+	 *
 	 * @param rutaFichero
-	 * @return
+	 * @return 0 si funciona; -1 si no
 	 */
 	@Override
 	public int frecuenciaLetras(String rutaFichero) {
