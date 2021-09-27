@@ -13,7 +13,7 @@ import java.util.Map;
  * @version v1
  * @license GPLv3
  */
-public class FicherosTexto implements InterfazFicherosTexto{
+public class FicherosTexto10 implements InterfazFicherosTexto{
 	/**
 	 * Ejercicio 2
 	 * @param rutaFichero
