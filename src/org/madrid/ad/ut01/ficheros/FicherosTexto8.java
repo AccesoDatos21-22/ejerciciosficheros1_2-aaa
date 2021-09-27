@@ -81,7 +81,7 @@ public class FicherosTexto8 implements InterfazFicherosTexto{
 					word += (char) charInt;
 					count = 0;
 				} else {
-					// Si no lo es y ya había comenzado una palabra, es porque tenemos otra palabra más terminada
+					// Si no lo es y ya habsía comenzado una palabra, es porque tenemos otra palabra más terminada
 					if (wordStarted) {
 						count++;
 						
