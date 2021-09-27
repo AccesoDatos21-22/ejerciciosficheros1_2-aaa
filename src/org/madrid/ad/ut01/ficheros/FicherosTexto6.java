@@ -11,28 +11,14 @@ import java.nio.charset.StandardCharsets;
  * @version v1
  * @license GPLv3
  */
-public class FicherosTexto2 implements InterfazFicherosTexto{
+public class FicherosTexto6 implements InterfazFicherosTexto{
 	/**
 	 * Ejercicio 2
 	 * @param rutaFichero
 	 */
 	@Override
 	public void leer(String rutaFichero) {
-		try (BufferedReader reader = new BufferedReader(new FileReader(rutaFichero))) {
-			while (true) {
-				int charInt = reader.read();
-				
-				if (charInt == -1) {
-					break;
-				}
-				
-				System.out.print((char)charInt);
-			}
-		} catch (FileNotFoundException e) {
-			System.err.println("Fichero " + rutaFichero + " no encontrado");
-		} catch (IOException e) {
-			System.err.println("El fichero " + rutaFichero + " no se pudo leer");
-		}
+		// TODO Auto-generated method stub
 	}
 	
 	/**
@@ -58,8 +44,34 @@ public class FicherosTexto2 implements InterfazFicherosTexto{
 	 */
 	@Override
 	public int contarPalabras(String rutaFichero) {
-		// TODO Auto-generated method stub
-		return 0;
+		int count = 0;
+		boolean wordStarted = false;
+		
+		try (BufferedReader reader = new BufferedReader(new FileReader(rutaFichero))) {
+			while (true) {
+				int charInt = reader.read();
+				
+				if (charInt == -1) {
+					break;
+				}
+				
+				if (isLetter(charInt)) {
+					wordStarted = true;
+				} else {
+					if (wordStarted) {
+						count++;
+						
+						wordStarted = false;
+					}
+				}
+			}
+		} catch (FileNotFoundException e) {
+			System.err.println("Fichero " + rutaFichero + " no encontrado");
+		} catch (IOException e) {
+			System.err.println("El fichero " + rutaFichero + " no se pudo leer");
+		}
+		
+		return count;
 	}
 	
 	@Override
@@ -92,5 +104,26 @@ public class FicherosTexto2 implements InterfazFicherosTexto{
 	public int frecuenciaLetras(String rutaFichero) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	
+	private boolean isLetter(int charInt) {
+		// Mayúsculas
+		if ((charInt >= 97 && charInt <= 123) || charInt == 241) {
+			return true;
+		}
+		
+		// Repetimos de nuevo en minúsculas
+		charInt -= 32;
+		
+		if ((charInt >= 97 && charInt <= 123) || charInt == 241) {
+			return true;
+		}
+		
+		// Acentos, diéresis, demás añadidos
+		if (charInt >= 160 && charInt <= 252) {
+			return true;
+		}
+		
+		return false;
 	}
 }
