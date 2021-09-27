@@ -14,7 +14,7 @@ public class Main {
 		// Padding
 		System.out.println("\n-----\n");
 		
-		// Ejercicio 4
+		// Ejercicio 4test
 		System.out.println("El Quijote contiene " + ficherosTexto.contarCaracteres(QUIJOTE) + " caracteres");
 	}
 }
