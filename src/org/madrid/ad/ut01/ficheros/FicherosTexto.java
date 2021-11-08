@@ -6,6 +6,7 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 /**
  * @author Alberto Jiménez
@@ -14,14 +15,17 @@ import java.util.Map;
  * @license GPLv3
  */
 public class FicherosTexto implements InterfazFicherosTexto{
+	/*
+	 * Alberto Jiménez
+	 */
+	
 	/**
 	 * Ejercicio 2
 	 * Lee el fichero caracter a caracter y lo va imprimiendo en tiempo real
 	 *
 	 * @param rutaFichero
 	 */
-	@Override
-	public void leer(String rutaFichero) {
+	public void leerBuffered(String rutaFichero) {
 		try (BufferedReader reader = new BufferedReader(new FileReader(rutaFichero))) {
 			while (true) {
 				int charInt = reader.read();
@@ -47,8 +51,7 @@ public class FicherosTexto implements InterfazFicherosTexto{
 	 * @param rutaFichero
 	 * @return Conteo de caracteres
 	 */
-	@Override
-	public int contarCaracteres(String rutaFichero) {
+	public int contarCaracteresVisibles(String rutaFichero) {
 		int count = 0;
 		
 		try (BufferedReader reader = new BufferedReader(new FileReader(rutaFichero))) {
@@ -73,11 +76,6 @@ public class FicherosTexto implements InterfazFicherosTexto{
 		}
 		
 		return count;
-	}
-	
-	@Override
-	public int contarLineas(String rutaFichero) {
-		return 0;
 	}
 	
 	/**
@@ -119,11 +117,6 @@ public class FicherosTexto implements InterfazFicherosTexto{
 		}
 		
 		return count;
-	}
-	
-	@Override
-	public int palabrasPentavocalica(String rutaFichero) {
-		return 0;
 	}
 	
 	/**
@@ -183,11 +176,6 @@ public class FicherosTexto implements InterfazFicherosTexto{
 		
 		System.out.println("La palabra más larga es '" + longestWord + "', con " + longestWord.length() + " caracteres");
 		
-		return 0;
-	}
-	
-	@Override
-	public int frecuenciaVocales(String rutaFichero) {
 		return 0;
 	}
 	
@@ -326,5 +314,188 @@ public class FicherosTexto implements InterfazFicherosTexto{
 			default:
 				return false;
 		}
+	}
+	
+	
+	/*
+	 * Fernando Fernández
+	 */
+	@Override
+	public void leer(String rutaFichero) {
+		
+		//opcion leer ruta , no se si el ejercicio se refiere a leer la ruta o a leer el fichero
+		//con lo cual hare las dos.
+		
+		for(int i=0;i<=rutaFichero.length()-1;i++){
+			System.out.println(rutaFichero.charAt(i));
+		}
+		
+		File fichero = new File(rutaFichero);
+		//declarar fichero
+		try (FileReader fr = new FileReader(fichero)) { //crear el flujo de entrada   
+			int caracter;
+			while ((caracter = fr.read()) != -1) //se va leyendo un carácter
+			{
+				System.out.print((char) caracter);
+			}
+		}
+		catch (FileNotFoundException e) {
+			System.err.println("Fichero no encontrado");
+		}
+		catch (IOException e) {
+			System.err.println(e);
+		}
+	}
+	
+	public int contarCaracteres(String rutaFichero) {
+		int cont=0;
+		
+		File fichero = new File(rutaFichero);
+		//declarar fichero
+		try (FileReader fr = new FileReader(fichero)) { //crear el flujo de entrada   
+			int caracter;
+			
+			while ((caracter = fr.read()) != -1) //se va leyendo un carácter
+			{
+				cont++;
+				
+			}
+		}
+		catch (FileNotFoundException e) {
+			System.err.println("Fichero no encontrado");
+		}
+		catch (IOException e) {
+			System.err.println(e);
+		}
+		
+		return cont;
+	}
+	
+	public int contarLineas(String rutaFichero) {
+		try {
+			File input = new File(rutaFichero);
+			Scanner iterate = new Scanner(input);
+			int numLines = 0;
+			while (iterate.hasNextLine()) {
+				iterate.nextLine();
+				numLines++;
+			}
+			return numLines;
+		} catch (Exception ex) {
+			return -1;
+		}
+	}
+	
+	public int palabrasPentavocalica(String rutaFichero) {
+		File archivo = null;
+		try {
+			archivo = new File(rutaFichero);
+			String linea;
+			FileReader fr = new FileReader (archivo);
+			BufferedReader br = new BufferedReader(fr);
+			int i,j,a=0;
+			String guardarPal ="",aux="";
+			while((linea=br.readLine())!=null) {
+				System.out.println(linea);System.out.println(linea.length());
+				for(i=0;i<linea.length()-1;i++)
+				{
+					System.out.println("VALORES   : "+linea.charAt(i)+" EN POSICION  : "+i);
+					
+					
+					if(linea.charAt(i)== ' ' || linea.charAt(i) =='\n'||  linea.charAt(i) ==',' ||  linea.charAt(i) ==';'||  linea.charAt(i) =='.' ){
+						aux = guardarPal;
+						guardarPal="";
+						System.out.println(aux);
+					}else{
+						guardarPal  = guardarPal +String.valueOf(linea.charAt(i));
+					}
+				}
+				
+				
+				
+				
+				j=0;
+			}
+			
+			
+			//System.out.println("estoy aqui    : "+i +" con este valor        :"+linea.charAt(i));
+			
+			
+			
+			
+			fr.close();
+		}
+		catch(IOException a){
+			System.out.println(a);
+		}
+		
+		return 0;
+	}
+	
+	@Override
+	public int frecuenciaVocales(String rutaFichero) {
+		int i,j;
+		int cont_a = 0,cont_e = 0,cont_i = 0,cont_o = 0,cont_u = 0,
+				cont_A = 0,cont_E = 0,cont_I = 0,cont_O = 0,cont_U = 0;
+		try {
+			File archivo = new File(rutaFichero);
+			String linea;
+			FileReader fr = new FileReader (archivo);
+			BufferedReader br = new BufferedReader(fr);
+			while((linea=br.readLine())!=null) {
+				
+				for(i=0;i<linea.length()-1;i++){
+					switch (linea.charAt(i)) {
+						case 'a':
+							cont_a++;
+						case 'e':
+							cont_e++;
+						case 'i':
+							cont_i++;
+						case 'o':
+							cont_o++;
+						case 'u':
+							cont_u++;
+						case 'A':
+							cont_A++;
+						case 'E':
+							cont_E++;
+						case 'I':
+							cont_I++;
+						case 'O':
+							cont_O++;
+						case 'U':
+							cont_U++;
+						
+						
+					}
+				}
+			}
+			
+			
+			
+			
+			fr.close();
+		}
+		catch(IOException a){
+			System.out.println(a);
+			
+			return -1;
+		}
+		
+		int[] numeros = new int[10];
+		String[] vocales = {"a", "e", "i", "o", "u", "A", "E", "I", "O", "U"};
+		
+		int array[] = {cont_a,cont_e,cont_i,cont_o,cont_u,cont_A,cont_E,cont_I,cont_O,cont_U};
+		
+		j = 0;
+		while (j <= array.length - 1) {
+			System.out.println(array[j] + "  frecuencia de cada vocal     ->" + vocales[j]);
+			j++;
+		}
+		
+		
+		
+		return 0;
 	}
 }
