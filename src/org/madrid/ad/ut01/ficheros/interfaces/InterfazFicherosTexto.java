@@ -9,9 +9,7 @@ package org.madrid.ad.ut01.ficheros.interfaces;
  *
  */
 public interface InterfazFicherosTexto {
-
 	/**
-	 * 	
 	 * Método que lee un fichero txt	  
 	 *
 	 * @param rutaFichero
@@ -19,16 +17,13 @@ public interface InterfazFicherosTexto {
 	public void leer(String rutaFichero);
 	
 	/**
-	 * 	
 	 * Método que cuenta en número de caracteres de un fichero txt	  
 	 *
 	 * @param rutaFichero
 	 */
 	public int contarCaracteres(String rutaFichero);
 	
-	
 	/**
-	 * 	
 	 * Método que cuenta en número de líneas de un fichero txt	  
 	 *
 	 * @param rutaFichero
@@ -36,7 +31,6 @@ public interface InterfazFicherosTexto {
 	public int contarLineas(String rutaFichero);
 	
 	/**
-	 * 	
 	 * Método que cuenta en número de palabras de un fichero txt	  
 	 *
 	 * @param rutaFichero
@@ -44,7 +38,6 @@ public interface InterfazFicherosTexto {
 	public int contarPalabras(String rutaFichero);
 	
 	/**
-	 * 	
 	 * Método que cuenta y muestra el número total de palabras pentavocálicas 
 	 *
 	 * @param rutaFichero
@@ -52,7 +45,6 @@ public interface InterfazFicherosTexto {
 	public int palabrasPentavocalica(String rutaFichero);
 	
 	/**
-	 * 	
 	 * Obtener y mostrar la palabra más larga, su número de letras y su posición
 	 *  (número de orden en la secuencia de palabras).
 	 *  Si hay más de una se toma la primera. 
@@ -64,27 +56,18 @@ public interface InterfazFicherosTexto {
 	public int palabraMasLarga(String rutaFichero);
 	
 	/**
-	 * 	
 	 * Método Obtener la frecuencia de las 5 vocales 
 	 * (número de veces que se repite cada vocal).  
 	 *
 	 * @param rutaFichero
 	 */
-	
 	public int frecuenciaVocales(String rutaFichero);
 	
-
 	/**
-	 * 	
 	 * Método Obtener la frecuencia de las 27 letras del alfabeto 
 	 * y muestra el resultado en orden descendente de frecuencia.  
 	 *
 	 * @param rutaFichero
 	 */
 	public int frecuenciaLetras(String rutaFichero);
-	
-	
-	
-	
-
 }
